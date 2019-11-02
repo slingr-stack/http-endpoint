@@ -4,14 +4,15 @@ import io.slingr.endpoints.HttpEndpoint;
 import io.slingr.endpoints.configurations.Configuration;
 import io.slingr.endpoints.exceptions.EndpointException;
 import io.slingr.endpoints.exceptions.ErrorCode;
-import io.slingr.endpoints.framework.annotations.ApplicationLogger;
-import io.slingr.endpoints.framework.annotations.EndpointConfiguration;
-import io.slingr.endpoints.framework.annotations.EndpointProperty;
-import io.slingr.endpoints.framework.annotations.SlingrEndpoint;
+import io.slingr.endpoints.framework.annotations.*;
 import io.slingr.endpoints.services.AppLogs;
+import io.slingr.endpoints.services.rest.RestMethod;
 import io.slingr.endpoints.utils.Json;
 import io.slingr.endpoints.utils.Strings;
+import io.slingr.endpoints.ws.exchange.WebServiceRequest;
+import io.slingr.endpoints.ws.exchange.WebServiceResponse;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.entity.ContentType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -106,5 +107,19 @@ public class Http extends HttpEndpoint {
             throw EndpointException.permanent(ErrorCode.ARGUMENT, String.format("Default headers [%s] are invalid", stringHeaders));
         }
         return headers;
+    }
+
+    @EndpointWebService(path = "/sync")
+    public WebServiceResponse optionsLoad(WebServiceRequest request) {
+        try {
+            Json body = request.getJsonBody();
+            Json options = (Json) events().sendSync("webhookSync", body);
+            return new WebServiceResponse(options, ContentType.APPLICATION_JSON.toString());
+        } catch (ClassCastException cce) {
+            appLogs.error("The response to the sync webhook from the listener is not a valid JSON");
+        } catch (Exception e) {
+            appLogs.error("There was an error processing sync webhook: " + e.getMessage(), e);
+        }
+        return new WebServiceResponse(Json.map(), ContentType.APPLICATION_JSON.toString());
     }
 }
