@@ -81,6 +81,9 @@
     "scripts":[
         "functions.js"
     ],
+    "flowSteps":  [
+        "httpCall"
+    ],
     "configuration":[
         {
             "name": "baseUrl",
