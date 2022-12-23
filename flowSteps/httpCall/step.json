@@ -58,7 +58,7 @@
 		{
 			"label": "URL",
 			"name": "url",
-			"description": "The base URL where this endpoint will send request to. Add path variables in Url if required",
+			"description": "The URL to which this endpoint will send the request.",
 			"type": "text",
 			"required": "true",
 			"options": {
