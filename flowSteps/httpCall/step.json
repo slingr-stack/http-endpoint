@@ -130,13 +130,19 @@
 		{
 			"label": "Settings",
 			"name": "settings",
-			"type": "label"
+			"type": "boolean",
+			"description": "If true, allows adding configurations",
+			"defaultValue": false,
+			"options": {
+				"allowContextSelector": "false"
+			}
 		},
 		{
 			"label": "Follow Redirects",
 			"name": "followRedirects",
 			"type": "boolean",
 			"description": "Follow the redirects when a HTTP request is executed",
+			"visibility": "config.settings",
 			"defaultValue": false,
 			"options": {
 				"allowContextSelector": "false"
@@ -147,6 +153,7 @@
 			"name": "download",
 			"type": "boolean",
 			"description": "Determines if the HTTP resource will be downloaded",
+			"visibility": "config.settings",
 			"defaultValue": false,
 			"options": {
 				"allowContextSelector": "false"
@@ -157,6 +164,7 @@
 			"name": "fullResponse",
 			"type": "boolean",
 			"description": "Include extended information about response",
+			"visibility": "config.settings",
 			"defaultValue": false,
 			"options": {
 				"allowContextSelector": "false"
@@ -166,6 +174,7 @@
 			"label": "Connection timeout",
 			"name": "connectionTimeout",
 			"description": "Connect timeout interval, in milliseconds (0 = infinity). Default value: 5000 ms (5 sec)",
+			"visibility": "config.settings",
 			"type": "text",
 			"defaultValue": "5000",
 			"typeOptions": {
@@ -182,6 +191,7 @@
 			"label": "Read timeout",
 			"name": "readTimeout",
 			"description": "Read timeout interval, in milliseconds (0 = infinity). Default value: 60000 ms (60 sec)",
+			"visibility": "config.settings",
 			"type": "text",
 			"defaultValue": "60000",
 			"typeOptions": {
