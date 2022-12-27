@@ -126,8 +126,8 @@
 			}
 		},
 		{
-			"label": "Settings",
-			"name": "settings",
+			"label": "Override Settings",
+			"name": "overrideSettings",
 			"type": "boolean",
 			"description": "If true, allows adding configurations",
 			"defaultValue": false,
