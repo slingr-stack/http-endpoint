@@ -61,15 +61,18 @@ step.httpCall = function (method, url,pathVariables, headers, params, body, requ
 
 var parse = function (url, pathVariables){
 
-	if(pathVariables){
-		url = url.replace(/:([a-zA-Z]+)/g, function(m, i) {
-			if (pathVariables[i]){
-				return pathVariables[i];
-			}else{
-				return m;
-			}
-		})
+	if (!url.includes(':')){
+		return url;
 	}
+
+	if(!pathVariables){
+		sys.logs.error('No path variables have been received and the url contains \':\'');
+		throw new Error('Error please contact support.');
+	}
+
+	url = url.replace(/:([a-zA-Z]+)/g, function(m, i) {
+		return pathVariables[i] ? pathVariables[i] : m;
+	})
 
 	return url;
 }
