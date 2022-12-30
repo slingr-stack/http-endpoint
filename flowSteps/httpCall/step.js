@@ -1,58 +1,58 @@
 /**
  * This flow step will send generic request.
  *
- * @param {text} method, This is used to config method.
- * @param {text} url, This is used to config external URL.
- * @param {Array[string]} headers, This is used to config headers.
- * @param {Array[string]} params, This is used to config params.
- * @param {string} body, This is used to send body request.
- * @param {string} callbackData, This is used to send callback data.
- * @param {text} callbacks, This is used to send callbacks.
- * @param {boolean} followRedirects, This is used to config follow redirects.
- * @param {boolean} download, This is used to config download.
- * @param {boolean} fullResponse, This is used to config full response.
- * @param {number} connectionTimeout, Read timeout interval, in milliseconds.
- * @param {number} readTimeout, Connect timeout interval, in milliseconds.
+ * @param {object} stepConfig.inputs
+ * {text} method, This is used to config method.
+ * {text} url, This is used to config external URL.
+ * {Array[string]} headers, This is used to config headers.
+ * {Array[string]} params, This is used to config params.
+ * {string} body, This is used to send body request.
+ * {string} callbackData, This is used to send callback data.
+ * {text} callbacks, This is used to send callbacks.
+ * {boolean} followRedirects, This is used to config follow redirects.
+ * {boolean} download, This is used to config download.
+ * {boolean} fullResponse, This is used to config full response.
+ * {number} connectionTimeout, Read timeout interval, in milliseconds.
+ * {number} readTimeout, Connect timeout interval, in milliseconds.
+ * @param {object} stepConfig.context {object} context
  */
-step.httpCall = function (method, url, headers, params, body, requiresCallBack,
-						  callbackData, callbacks, overrideSettings, followRedirects,
-						  download, fullResponse,connectionTimeout, readTimeout) {
+step.httpCall = function (stepConfig) {
 
-	headers = isObject(headers) ? headers : stringToObject(headers)
-	params = isObject(params) ? params : stringToObject(params)
-	body = isObject(body) ? body : JSON.parse(body);
+	var headers = isObject(stepConfig.inputs.headers) ? stepConfig.inputs.headers : stringToObject(stepConfig.inputs.headers)
+	var params = isObject(stepConfig.inputs.params) ? stepConfig.inputs.params : stringToObject(stepConfig.inputs.params)
+	var body = isObject(stepConfig.inputs.body) ? stepConfig.inputs.body : JSON.parse(stepConfig.inputs.body);
 
 	var options = {
-		path: url,
-		params:params,
-		headers:headers,
+		path: stepConfig.inputs.url,
+		params: params,
+		headers: headers,
 		body: body,
-		followRedirects : followRedirects,
-		download : download,
-		fullResponse : fullResponse,
-		connectionTimeout:connectionTimeout,
-		readTimeout:readTimeout
+		followRedirects : stepConfig.inputs.followRedirects,
+		download : stepConfig.inputs.download,
+		fullResponse : stepConfig.inputs.fullResponse,
+		connectionTimeout: stepConfig.inputs.connectionTimeout,
+		readTimeout: stepConfig.inputs.readTimeout
 	}
 
-	switch (method) {
+	switch (stepConfig.inputs.method) {
 		case 'get':
-			return endpoint._get(options, callbackData, callbacks);
+			return endpoint._get(options, stepConfig.inputs.callbackData, stepConfig.inputs.callbacks);
 		case 'post':
-			return endpoint._post(options, callbackData, callbacks);
+			return endpoint._post(options, stepConfig.inputs.callbackData, stepConfig.inputs.callbacks);
 		case 'delete':
-			return endpoint._delete(options, callbackData, callbacks);
+			return endpoint._delete(options, stepConfig.inputs.callbackData, stepConfig.inputs.callbacks);
 		case 'put':
-			return endpoint._put(options, callbackData, callbacks);
+			return endpoint._put(options, stepConfig.inputs.callbackData, stepConfig.inputs.callbacks);
 		case 'connect':
-			return endpoint._connect(options, callbackData, callbacks);
+			return endpoint._connect(options, stepConfig.inputs.callbackData, stepConfig.inputs.callbacks);
 		case 'head':
-			return endpoint._head(options, callbackData, callbacks);
+			return endpoint._head(options, stepConfig.inputs.callbackData, stepConfig.inputs.callbacks);
 		case 'options':
-			return endpoint._options(options, callbackData, callbacks);
+			return endpoint._options(options, stepConfig.inputs.callbackData, stepConfig.inputs.callbacks);
 		case 'patch':
-			return endpoint._patch(options, callbackData, callbacks);
+			return endpoint._patch(options, stepConfig.inputs.callbackData, stepConfig.inputs.callbacks);
 		case 'trace':
-			return endpoint._trace(options, callbackData, callbacks);
+			return endpoint._trace(options, stepConfig.inputs.callbackData, stepConfig.inputs.callbacks);
 		default:
 			return null;
 	}
