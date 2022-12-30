@@ -69,9 +69,7 @@
 			"label": "Path Variables",
 			"name": "pathVariables",
 			"description": "If your request requires a path variable, you should add this entry",
-			"type": "keyValue",
-			"visibility": "config.url.indexOf(':') > -1",
-			"required": "config.url.indexOf(':') > -1"
+			"type": "keyValue"
 		},
 		{
 			"label": "Headers",
