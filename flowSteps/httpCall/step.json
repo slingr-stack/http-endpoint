@@ -70,6 +70,8 @@
 			"name": "pathVariables",
 			"description": "If your request requires a path variable, you should add this entry",
 			"type": "keyValue",
+			"visibility": "config.url.includes(':')",
+			"required": "config.url.includes(':')",
 			"options": {
 				"allowContextSelector": "false"
 			}
