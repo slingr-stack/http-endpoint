@@ -70,29 +70,20 @@
 			"name": "pathVariables",
 			"description": "If your request requires a path variable, you should add this entry",
 			"type": "keyValue",
-			"visibility": "config.url.includes(':')",
-			"required": "config.url.includes(':')",
-			"options": {
-				"allowContextSelector": "false"
-			}
+			"visibility": "config.url.indexOf(':') > -1",
+			"required": "config.url.indexOf(':') > -1"
 		},
 		{
 			"label": "Headers",
 			"name": "headers",
 			"description": "The headers have the 'key=value' form, per example: key=ABC123",
-			"type": "keyValue",
-			"options": {
-				"allowContextSelector": "false"
-			}
+			"type": "keyValue"
 		},
 		{
 			"label": "Params",
 			"name": "params",
 			"description": "The params have the 'key=value' form, per example: key=ABC123",
-			"type": "keyValue",
-			"options": {
-				"allowContextSelector": "false"
-			}
+			"type": "keyValue"
 		},
 		{
 			"label": "Body",
