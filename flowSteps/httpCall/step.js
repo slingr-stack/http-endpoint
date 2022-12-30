@@ -14,7 +14,7 @@
  * @param {number} connectionTimeout, Read timeout interval, in milliseconds.
  * @param {number} readTimeout, Connect timeout interval, in milliseconds.
  */
-step.httpCall = function (method, url, headers, params, body, requiresCallBack,
+step.httpCall = function (method, url,pathVariables, headers, params, body, requiresCallBack,
 						  callbackData, callbacks, overrideSettings, followRedirects,
 						  download, fullResponse,connectionTimeout, readTimeout) {
 
@@ -23,7 +23,7 @@ step.httpCall = function (method, url, headers, params, body, requiresCallBack,
 	body = isObject(body) ? body : JSON.parse(body);
 
 	var options = {
-		path: url,
+		path: parse( url, pathVariables),
 		params:params,
 		headers:headers,
 		body: body,
@@ -59,6 +59,20 @@ step.httpCall = function (method, url, headers, params, body, requiresCallBack,
 
 };
 
+var parse = function (url, pathVariables){
+
+	if(pathVariables){
+		url = url.replace(/:([a-zA-Z]+)/g, function(m, i) {
+			if (pathVariables[i]){
+				return pathVariables[i];
+			}else{
+				return m;
+			}
+		})
+	}
+
+	return url;
+}
 var isObject = function (obj) {
 	return !!obj && stringType(obj) === '[object Object]'
 };
