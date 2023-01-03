@@ -61,16 +61,18 @@ step.httpCall = function (method, url,pathVariables, headers, params, body, requ
 
 var parse = function (url, pathVariables){
 
-	if (!url.includes(':')){
+	var regex = /{([^}]*)}/g;
+
+	if (!url.match(regex)){
 		return url;
 	}
 
 	if(!pathVariables){
-		sys.logs.error('No path variables have been received and the url contains \':\'');
+		sys.logs.error('No path variables have been received and the url contains curly brackets\'{}\'');
 		throw new Error('Error please contact support.');
 	}
 
-	url = url.replace(/:([a-zA-Z]+)/g, function(m, i) {
+	url = url.replace(regex, function(m, i) {
 		return pathVariables[i] ? pathVariables[i] : m;
 	})
 
