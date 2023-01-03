@@ -4,6 +4,7 @@
  * @param {object} stepConfig.inputs
  * {text} method, This is used to config method.
  * {text} url, This is used to config external URL.
+ * {Array[string]} pathVariables, This is used to config path variables.
  * {Array[string]} headers, This is used to config headers.
  * {Array[string]} params, This is used to config params.
  * {string} body, This is used to send body request.
@@ -23,7 +24,7 @@ step.httpCall = function (stepConfig) {
 	var body = isObject(stepConfig.inputs.body) ? stepConfig.inputs.body : JSON.parse(stepConfig.inputs.body);
 
 	var options = {
-		path: parse( stepConfig.inputs.url,stepConfig.inputs.pathVariables),
+		path: parse( stepConfig.inputs.url, stepConfig.inputs.pathVariables),
 		params:params,
 		headers:headers,
 		body: body,
