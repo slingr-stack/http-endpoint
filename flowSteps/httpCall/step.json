@@ -69,19 +69,28 @@
 			"label": "Path Variables",
 			"name": "pathVariables",
 			"description": "If your request requires a path variable, you should add this entry, e.g.: userId = 1",
-			"type": "keyValue"
+			"type": "keyValue",
+			"options": {
+				"allowContextSelector": "false"
+			}
 		},
 		{
 			"label": "Headers",
 			"name": "headers",
 			"description": "The headers have the 'key=value' form, per example: key=ABC123",
-			"type": "keyValue"
+			"type": "keyValue",
+			"options": {
+				"allowContextSelector": "false"
+			}
 		},
 		{
 			"label": "Params",
 			"name": "params",
 			"description": "The params have the 'key=value' form, per example: key=ABC123",
-			"type": "keyValue"
+			"type": "keyValue",
+			"options": {
+				"allowContextSelector": "false"
+			}
 		},
 		{
 			"label": "Body",
