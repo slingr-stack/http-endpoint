@@ -60,28 +60,19 @@
 			"name": "url",
 			"description": "The URL to which this endpoint will send the request. Use curly brackets if you require path variables e.g.: https://app.slinger/user/{userId}",
 			"type": "urlParams",
-			"required": "true",
-			"options": {
-				"allowContextSelector": "false"
-			}
+			"required": "true"
 		},
 		{
 			"label": "Headers",
 			"name": "headers",
 			"description": "The headers have the 'key=value' form, per example: key=ABC123",
-			"type": "keyValue",
-			"options": {
-				"allowContextSelector": "false"
-			}
+			"type": "keyValue"
 		},
 		{
 			"label": "Params",
 			"name": "params",
 			"description": "The params have the 'key=value' form, per example: key=ABC123",
-			"type": "keyValue",
-			"options": {
-				"allowContextSelector": "false"
-			}
+			"type": "keyValue"
 		},
 		{
 			"label": "Body",
@@ -150,11 +141,32 @@
 			"label": "Download",
 			"name": "download",
 			"type": "boolean",
-			"description": "Determines if the HTTP resource will be downloaded",
+			"description": "Indicates that the resource has to be downloaded into a file instead of returning it in the response.",
 			"visibility": "config.overrideSettings",
 			"defaultValue": false,
 			"options": {
 				"allowContextSelector": "false"
+			}
+		},
+		{
+			"label": "Download Sync",
+			"name": "downloadSync",
+			"type": "boolean",
+			"description": "If true the method won't return until the file has been downloaded and it will return all the information of the file.",
+			"visibility": "config.overrideSettings",
+			"defaultValue": false,
+			"options": {
+				"allowContextSelector": "false"
+			}
+		},
+		{
+			"label": "File Name",
+			"name": "fileName",
+			"description": "If provided, the file will be stored with this name. If empty the file name will be calculated from the URL.",
+			"visibility": "config.overrideSettings",
+			"type": "text",
+			"options": {
+				"allowContextSelector": "true"
 			}
 		},
 		{
