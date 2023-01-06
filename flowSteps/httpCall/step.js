@@ -24,7 +24,7 @@ step.httpCall = function (stepConfig) {
 	var body = isObject(stepConfig.inputs.body) ? stepConfig.inputs.body : JSON.parse(stepConfig.inputs.body);
 
 	var options = {
-		path: parse( stepConfig.inputs.url, stepConfig.inputs.pathVariables),
+		path: parse(stepConfig.inputs.url.urlValue, stepConfig.inputs.url.paramsValue),
 		params:params,
 		headers:headers,
 		body: body,
