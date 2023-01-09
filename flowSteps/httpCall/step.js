@@ -4,6 +4,7 @@
  * @param {object} stepConfig.inputs
  * {text} method, This is used to config method.
  * {text} url, This is used to config external URL.
+ * {Array[string]} pathVariables, This is used to config path variables.
  * {Array[string]} headers, This is used to config headers.
  * {Array[string]} params, This is used to config params.
  * {string} body, This is used to send body request.
@@ -23,12 +24,14 @@ step.httpCall = function (stepConfig) {
 	var body = isObject(stepConfig.inputs.body) ? stepConfig.inputs.body : JSON.parse(stepConfig.inputs.body);
 
 	var options = {
-		path: stepConfig.inputs.url,
-		params: params,
-		headers: headers,
+		path: parse(stepConfig.inputs.url.urlValue, stepConfig.inputs.url.paramsValue),
+		params:params,
+		headers:headers,
 		body: body,
 		followRedirects : stepConfig.inputs.followRedirects,
-		download : stepConfig.inputs.download,
+		forceDownload : stepConfig.inputs.download,
+		downloadSync : stepConfig.inputs.downloadSync,
+		fileName: stepConfig.inputs.fileName,
 		fullResponse : stepConfig.inputs.fullResponse,
 		connectionTimeout: stepConfig.inputs.connectionTimeout,
 		readTimeout: stepConfig.inputs.readTimeout
@@ -59,6 +62,25 @@ step.httpCall = function (stepConfig) {
 
 };
 
+var parse = function (url, pathVariables){
+
+	var regex = /{([^}]*)}/g;
+
+	if (!url.match(regex)){
+		return url;
+	}
+
+	if(!pathVariables){
+		sys.logs.error('No path variables have been received and the url contains curly brackets\'{}\'');
+		throw new Error('Error please contact support.');
+	}
+
+	url = url.replace(regex, function(m, i) {
+		return pathVariables[i] ? pathVariables[i] : m;
+	})
+
+	return url;
+}
 var isObject = function (obj) {
 	return !!obj && stringType(obj) === '[object Object]'
 };
