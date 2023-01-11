@@ -98,11 +98,12 @@
 		{
 			"label": "Callback data",
 			"name": "callbackData",
-			"type": "json",
+			"type": "text",
 			"description": "This is an object you can send that you will get back when the callback is processed",
 			"visibility": "config.requiresCallBack",
 			"options": {
-				"allowContextSelector": "false"
+				"representation": "textArea",
+				"allowContextSelector": "true"
 			}
 		},
 		{
@@ -113,7 +114,7 @@
 			"visibility": "config.requiresCallBack",
 			"options": {
 				"allowContextSelector": "false",
-				"parameters": ["event","data"]
+				"parameters": ["event","callbackData"]
 			}
 		},
 		{
@@ -153,7 +154,7 @@
 			"name": "downloadSync",
 			"type": "boolean",
 			"description": "If true the method won't return until the file has been downloaded and it will return all the information of the file.",
-			"visibility": "config.overrideSettings",
+			"visibility": "config.overrideSettings && config.download",
 			"defaultValue": false,
 			"options": {
 				"allowContextSelector": "false"
@@ -163,7 +164,7 @@
 			"label": "File Name",
 			"name": "fileName",
 			"description": "If provided, the file will be stored with this name. If empty the file name will be calculated from the URL.",
-			"visibility": "config.overrideSettings",
+			"visibility": "config.overrideSettings && config.download",
 			"type": "text",
 			"options": {
 				"allowContextSelector": "true"

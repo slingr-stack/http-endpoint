@@ -37,6 +37,11 @@ step.httpCall = function (stepConfig) {
 		readTimeout: stepConfig.inputs.readTimeout
 	}
 
+	stepConfig.inputs.callbacks = stepConfig.inputs.callbacks ?
+		eval("stepConfig.inputs.callbacks = {fileDownloaded : function(event, callbackData) {" + stepConfig.inputs.callbacks + "}}") : stepConfig.inputs.callbacks;
+
+	stepConfig.inputs.callbackData = stepConfig.inputs.callbackData ? {record:stepConfig.inputs.callbackData} : stepConfig.inputs.callbackData;
+
 	switch (stepConfig.inputs.method) {
 		case 'get':
 			return endpoint._get(options, stepConfig.inputs.callbackData, stepConfig.inputs.callbacks);
