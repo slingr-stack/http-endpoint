@@ -23,18 +23,24 @@ step.httpCall = function (stepConfig) {
 	var params = isObject(stepConfig.inputs.params) ? stepConfig.inputs.params : stringToObject(stepConfig.inputs.params)
 	var body = isObject(stepConfig.inputs.body) ? stepConfig.inputs.body : JSON.parse(stepConfig.inputs.body);
 
+	stepConfig.inputs.callbacks = stepConfig.inputs.callbacks ?
+		eval("stepConfig.inputs.callbacks = {" + stepConfig.inputs.events + " : function(event, callbackData) {" + stepConfig.inputs.callbacks + "}}") : stepConfig.inputs.callbacks;
+
+	stepConfig.inputs.callbackData = stepConfig.inputs.callbackData ? {record:stepConfig.inputs.callbackData} : stepConfig.inputs.callbackData;
+
 	var options = {
 		path: parse(stepConfig.inputs.url.urlValue, stepConfig.inputs.url.paramsValue),
 		params:params,
 		headers:headers,
 		body: body,
 		followRedirects : stepConfig.inputs.followRedirects,
-		forceDownload : stepConfig.inputs.download,
-		downloadSync : stepConfig.inputs.downloadSync,
+		forceDownload : stepConfig.inputs.events === "fileDownloaded" ? true : stepConfig.inputs.download,
+		downloadSync : stepConfig.inputs.events === "fileDownloaded" ? false : stepConfig.inputs.download,
 		fileName: stepConfig.inputs.fileName,
 		fullResponse : stepConfig.inputs.fullResponse,
 		connectionTimeout: stepConfig.inputs.connectionTimeout,
-		readTimeout: stepConfig.inputs.readTimeout
+		readTimeout: stepConfig.inputs.readTimeout,
+		defaultCallback: !!stepConfig.inputs.events
 	}
 
 	switch (stepConfig.inputs.method) {
