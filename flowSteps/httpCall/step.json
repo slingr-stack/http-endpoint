@@ -86,34 +86,45 @@
 			}
 		},
 		{
-			"label": "Requires callback",
-			"name": "requiresCallBack",
-			"type": "boolean",
-			"description": "If true it will return callback",
-			"defaultValue": false,
+			"label": "Event",
+			"name": "events",
+			"type": "dropDown",
+			"description": "Select event",
+			"multiplicity": "one",
 			"options": {
+				"possibleValues": [
+					{
+						"label": "File Downloaded",
+						"name": "fileDownloaded"
+					},
+					{
+						"label": "Callback",
+						"name": "callback"
+					}
+				],
 				"allowContextSelector": "false"
 			}
 		},
 		{
-			"label": "Callback data",
+			"label": "Callback Data",
 			"name": "callbackData",
-			"type": "json",
-			"description": "This is an object you can send that you will get back when the callback is processed",
-			"visibility": "config.requiresCallBack",
+			"type": "text",
+			"description": "This is an object you can send that you will get back when the function is processed",
+			"visibility": "config.events",
 			"options": {
-				"allowContextSelector": "false"
+				"representation": "textArea",
+				"allowContextSelector": "true"
 			}
 		},
 		{
 			"label": "Callbacks",
 			"name": "callbacks",
 			"type": "script",
-			"description": "This is a map where you can listener for different callbacks",
-			"visibility": "config.requiresCallBack",
+			"description": "This is a map where you can listener for different function",
+			"visibility": "config.events",
 			"options": {
 				"allowContextSelector": "false",
-				"parameters": ["event","data"]
+				"parameters": ["event","callbackData"]
 			}
 		},
 		{
@@ -142,18 +153,7 @@
 			"name": "download",
 			"type": "boolean",
 			"description": "Indicates that the resource has to be downloaded into a file instead of returning it in the response.",
-			"visibility": "config.overrideSettings",
-			"defaultValue": false,
-			"options": {
-				"allowContextSelector": "false"
-			}
-		},
-		{
-			"label": "Download Sync",
-			"name": "downloadSync",
-			"type": "boolean",
-			"description": "If true the method won't return until the file has been downloaded and it will return all the information of the file.",
-			"visibility": "config.overrideSettings",
+			"visibility": "config.overrideSettings && config.events != \"fileDownloaded\"",
 			"defaultValue": false,
 			"options": {
 				"allowContextSelector": "false"
@@ -163,7 +163,7 @@
 			"label": "File Name",
 			"name": "fileName",
 			"description": "If provided, the file will be stored with this name. If empty the file name will be calculated from the URL.",
-			"visibility": "config.overrideSettings",
+			"visibility": "(config.overrideSettings && config.download) || config.events === \"fileDownloaded\"",
 			"type": "text",
 			"options": {
 				"allowContextSelector": "true"

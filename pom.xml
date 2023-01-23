@@ -11,7 +11,7 @@
 
     <properties>
         <!-- SLINGR versions -->
-        <slingr.slingr-endpoints.version>1.0-SNAPSHOT</slingr.slingr-endpoints.version>
+        <slingr.slingr-endpoints.version>2.0-SNAPSHOT</slingr.slingr-endpoints.version>
         <!-- Core libraries properties -->
         <log4j.version>2.8.2</log4j.version>
         <logentries.version>1.1.11</logentries.version>
