@@ -2,53 +2,51 @@
 	"label": "HTTP call",
 	"name": "httpCall",
 	"category": "integrations",
-	"description": "This flow step will send generic request",
+	"description": "This flow step is to send HTTP requests in a generic way.",
 	"inputs": [
 		{
 			"label": "Method",
 			"name": "method",
 			"type": "dropDown",
-			"description": "Select method",
 			"multiplicity": "one",
-			"defaultValue": [
-				"get"
-			],
+			"required": true,
+			"defaultValue": "get",
 			"options": {
 				"possibleValues": [
 					{
-						"label": "Get",
+						"label": "GET",
 						"name": "get"
 					},
 					{
-						"label": "Post",
+						"label": "POST",
 						"name": "post"
 					},
 					{
-						"label": "Put",
+						"label": "PUT",
 						"name": "put"
 					},
 					{
-						"label": "Delete",
+						"label": "DELETE",
 						"name": "delete"
 					},
 					{
-						"label": "Connect",
+						"label": "CONNECT",
 						"name": "connect"
 					},
 					{
-						"label": "Head",
+						"label": "HEAD",
 						"name": "head"
 					},
 					{
-						"label": "Options",
+						"label": "OPTIONS",
 						"name": "options"
 					},
 					{
-						"label": "Patch",
+						"label": "PATCH",
 						"name": "patch"
 					},
 					{
-						"label": "Trace",
+						"label": "TRACE",
 						"name": "trace"
 					}
 				],
@@ -65,13 +63,13 @@
 		{
 			"label": "Headers",
 			"name": "headers",
-			"description": "The headers have the 'key=value' form, per example: key=ABC123",
+			"description": "Let the client and the server pass additional information with an HTTP request or response in a key value format.",
 			"type": "keyValue"
 		},
 		{
-			"label": "Params",
+			"label": "Query params",
 			"name": "params",
-			"description": "The params have the 'key=value' form, per example: key=ABC123",
+			"description": "Parameters attached to the end of a url in a key value format",
 			"type": "keyValue"
 		},
 		{
@@ -80,7 +78,7 @@
 			"type": "json",
 			"required": "['post', 'put', 'patch'].includes(config.method)",
 			"visibility": "['post', 'put', 'patch'].includes(config.method)",
-			"description": "This is used to set body request",
+			"description": "Content to be sent to the server",
 			"options": {
 				"allowContextSelector": "false"
 			}
@@ -89,7 +87,6 @@
 			"label": "Event",
 			"name": "events",
 			"type": "dropDown",
-			"description": "Select event",
 			"multiplicity": "one",
 			"options": {
 				"possibleValues": [
