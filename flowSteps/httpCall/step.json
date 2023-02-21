@@ -82,7 +82,7 @@
 			"visibility": "['post', 'put', 'patch'].includes(config.method)",
 			"description": "This is used to set body request",
 			"options": {
-				"allowContextSelector": "false"
+				"allowContextSelector": "true"
 			}
 		},
 		{
