@@ -40,8 +40,8 @@ step.httpCall = function (inputs) {
 
 	var options = {
 		path: parse(inputs.url.urlValue, inputs.url.paramsValue),
-		params:inputs.params,
-		headers:inputs.headers,
+		params: inputs.params,
+		headers: inputs.headers,
 		body: inputs.body,
 		followRedirects : inputs.followRedirects,
 		forceDownload :inputs.download,
@@ -49,8 +49,7 @@ step.httpCall = function (inputs) {
 		fileName: inputs.fileName,
 		fullResponse : inputs.fullResponse,
 		connectionTimeout: inputs.connectionTimeout,
-		readTimeout: inputs.readTimeout,
-		defaultCallback: !!inputs.events
+		readTimeout: inputs.readTimeout
 	}
 
 	switch (inputs.method) {
