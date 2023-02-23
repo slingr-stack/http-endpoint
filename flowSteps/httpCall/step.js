@@ -34,9 +34,9 @@ step.httpCall = function (inputs) {
 		method: inputs.method || ""
 	};
 
-	var headers = isObject(inputs.headers) ? inputs.headers : stringToObject(inputs.headers)
-	var params = isObject(inputs.params) ? inputs.params : stringToObject(inputs.params)
-	var body = isObject(inputs.body) ? inputs.body : JSON.parse(inputs.body);
+	inputs.headers = isObject(inputs.headers) ? inputs.headers : stringToObject(inputs.headers)
+	inputs.params = isObject(inputs.params) ? inputs.params : stringToObject(inputs.params)
+	inputs.body = isObject(inputs.body) ? inputs.body : JSON.parse(inputs.body);
 
 	var options = {
 		path: parse(inputs.url.urlValue, inputs.url.paramsValue),
