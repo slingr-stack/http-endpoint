@@ -84,47 +84,6 @@
 			}
 		},
 		{
-			"label": "Event",
-			"name": "events",
-			"type": "dropDown",
-			"multiplicity": "one",
-			"options": {
-				"possibleValues": [
-					{
-						"label": "File Downloaded",
-						"name": "fileDownloaded"
-					},
-					{
-						"label": "Callback",
-						"name": "callback"
-					}
-				],
-				"allowContextSelector": "false"
-			}
-		},
-		{
-			"label": "Callback Data",
-			"name": "callbackData",
-			"type": "text",
-			"description": "This is an object you can send that you will get back when the function is processed",
-			"visibility": "config.events",
-			"options": {
-				"representation": "textArea",
-				"allowContextSelector": "true"
-			}
-		},
-		{
-			"label": "Callbacks",
-			"name": "callbacks",
-			"type": "script",
-			"description": "This is a map where you can listener for different function",
-			"visibility": "config.events",
-			"options": {
-				"allowContextSelector": "false",
-				"parameters": ["event","callbackData"]
-			}
-		},
-		{
 			"label": "Override Settings",
 			"name": "overrideSettings",
 			"type": "boolean",
