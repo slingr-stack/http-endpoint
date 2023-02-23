@@ -27,12 +27,11 @@ step.httpCall = function (inputs) {
 		fullResponse: inputs.fullResponse || false,
 		connectionTimeout: inputs.connectionTimeout || 5000,
 		readTimeout: inputs.readTimeout || 60000,
-		events: inputs.events || "",
 		url: inputs.url || {
 			urlValue: "",
 			paramsValue: []
 		},
-		path: inputs.path || ""
+		method: inputs.method || ""
 	};
 
 	var headers = isObject(inputs.headers) ? inputs.headers : stringToObject(inputs.headers)
