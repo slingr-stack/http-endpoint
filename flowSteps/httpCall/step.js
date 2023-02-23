@@ -40,9 +40,9 @@ step.httpCall = function (inputs) {
 
 	var options = {
 		path: parse(inputs.url.urlValue, inputs.url.paramsValue),
-		params:params,
-		headers:headers,
-		body: body,
+		params:inputs.params,
+		headers:inputs.headers,
+		body: inputs.body,
 		followRedirects : inputs.followRedirects,
 		forceDownload :inputs.download,
 		downloadSync : false,
