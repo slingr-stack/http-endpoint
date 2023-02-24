@@ -16,7 +16,7 @@
         "allowMultipleInstances": false
     },
     "icon48": "https://storage.googleapis.com/static.slingrs.io/platform/endpoints/http.png",
-    "configurationHelpUrl": "/endpoints_http.html#configuration",
+    "configurationHelpUrl": "/endpoints-http.html#configuration",
     "status": "ACTIVE",
     "stores": [],
     "events": [
