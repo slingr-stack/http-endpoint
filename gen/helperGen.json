@@ -1,5 +1,12 @@
 {
   "fileName": "functions",
   "endpointName": "http",
-  "apiDescriptors": []
+  "apiDescriptors": [
+    {
+      "prefix": "",
+      "suffix": "",
+      "method": "GET",
+      "url": "/sync"
+    }
+  ]
 }

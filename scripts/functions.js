@@ -8,6 +8,15 @@
 //                                                                        //
 ////////////////////////////////////////////////////////////////////////////
 
+endpoint.sync = {};
+
+endpoint.sync.get = function(httpOption) {
+    var url = parse('/sync');
+    sys.logs.debug('[http] GET from: ' + url);
+    var options = checkHttpOptions(url, httpOptions);
+    return endpoint._get(options);
+};
+
 ////////////////////////////////////
 // Public API - Generic Functions //
 ////////////////////////////////////

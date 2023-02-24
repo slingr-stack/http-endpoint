@@ -84,7 +84,7 @@
 			}
 		},
 		{
-			"label": "Override Settings",
+			"label": "Advanced Settings",
 			"name": "overrideSettings",
 			"type": "boolean",
 			"description": "If true, allows adding configurations",
@@ -98,38 +98,6 @@
 			"name": "followRedirects",
 			"type": "boolean",
 			"description": "Follow the redirects when a HTTP request is executed",
-			"visibility": "config.overrideSettings",
-			"defaultValue": false,
-			"options": {
-				"allowContextSelector": "false"
-			}
-		},
-		{
-			"label": "Download",
-			"name": "download",
-			"type": "boolean",
-			"description": "Indicates that the resource has to be downloaded into a file instead of returning it in the response.",
-			"visibility": "config.overrideSettings && config.events != \"fileDownloaded\"",
-			"defaultValue": false,
-			"options": {
-				"allowContextSelector": "false"
-			}
-		},
-		{
-			"label": "File Name",
-			"name": "fileName",
-			"description": "If provided, the file will be stored with this name. If empty the file name will be calculated from the URL.",
-			"visibility": "(config.overrideSettings && config.download) || config.events === \"fileDownloaded\"",
-			"type": "text",
-			"options": {
-				"allowContextSelector": "true"
-			}
-		},
-		{
-			"label": "Full Response",
-			"name": "fullResponse",
-			"type": "boolean",
-			"description": "Include extended information about response",
 			"visibility": "config.overrideSettings",
 			"defaultValue": false,
 			"options": {

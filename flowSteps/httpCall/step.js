@@ -20,9 +20,7 @@ step.httpCall = function (inputs) {
 		headers: inputs.headers || [],
 		params: inputs.params || [],
 		body: inputs.body || {},
-		download: inputs.download || false,
-		fileName: inputs.fileName || "",
-		fullResponse: inputs.fullResponse || false,
+		followRedirects : inputs.followRedirects || false,
 		connectionTimeout: inputs.connectionTimeout || 5000,
 		readTimeout: inputs.readTimeout || 60000,
 		url: inputs.url || {
@@ -43,10 +41,6 @@ step.httpCall = function (inputs) {
 		headers: inputsLogic.headers,
 		body: inputsLogic.body,
 		followRedirects : inputsLogic.followRedirects,
-		forceDownload :inputsLogic.download,
-		downloadSync : false,
-		fileName: inputsLogic.fileName,
-		fullResponse : inputsLogic.fullResponse,
 		connectionTimeout: inputsLogic.connectionTimeout,
 		readTimeout: inputsLogic.readTimeout
 	}
