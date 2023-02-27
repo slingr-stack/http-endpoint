@@ -1,46 +1,93 @@
+////////////////////////////////////////////////////////////////////////////
+//                                                                        //
+//             This file was generated with "slingr-helpgen"              //
+//                                                                        //
+//               For more info, check the following links:                //
+//             https://www.npmjs.com/package/slingr-helpgen               //
+//           https://github.com/slingr-stack/slingr-helpgen               //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////
-// Public API - Generic Functions
-//////////////////////////////////
+endpoint.sync = {};
 
-endpoint.get = function(url, callbackData, callbacks) {
-    var options = checkHttpOptions(url, {});
-    return endpoint._get(options, callbackData, callbacks);
+endpoint.sync.get = function(httpOption) {
+    var url = parse('/sync');
+    sys.logs.debug('[http] GET from: ' + url);
+    var options = checkHttpOptions(url, httpOptions);
+    return endpoint._get(options);
 };
 
-endpoint.post = function(url, options) {
-    options = checkHttpOptions(url, options);
+////////////////////////////////////
+// Public API - Generic Functions //
+////////////////////////////////////
+
+endpoint.get = function(url, httpOptions) {
+    var options = checkHttpOptions(url, httpOptions);
+    return endpoint._get(options);
+};
+
+endpoint.post = function(url, httpOptions) {
+    options = checkHttpOptions(url, httpOptions);
     return endpoint._post(options);
 };
 
-endpoint.put = function(url, options) {
-    options = checkHttpOptions(url, options);
+endpoint.put = function(url, httpOptions) {
+    options = checkHttpOptions(url, httpOptions);
     return endpoint._put(options);
 };
 
-endpoint.patch = function(url, options) {
-    options = checkHttpOptions(url, options);
+endpoint.patch = function(url, httpOptions) {
+    options = checkHttpOptions(url, httpOptions);
     return endpoint._patch(options);
 };
 
-endpoint.delete = function(url) {
-    var options = checkHttpOptions(url, {});
+endpoint.delete = function(url, httpOptions) {
+    var options = checkHttpOptions(url, httpOptions);
     return endpoint._delete(options);
 };
 
-endpoint.head = function(url) {
-    var options = checkHttpOptions(url, {});
+endpoint.head = function(url, httpOptions) {
+    var options = checkHttpOptions(url, httpOptions);
     return endpoint._head(options);
 };
 
-endpoint.options = function(url) {
-    var options = checkHttpOptions(url, {});
+endpoint.options = function(url, httpOptions) {
+    var options = checkHttpOptions(url, httpOptions);
     return endpoint._options(options);
 };
 
-/////////////////////////////////////
-//  Private helpers
-////////////////////////////////////
+endpoint.utils.parseTimestamp = function(dateString) {
+    if (!dateString) {
+        return null;
+    }
+    var dt = dateString.split(/[: T\-]/).map(parseFloat);
+    return new Date(dt[0], dt[1] - 1, dt[2], dt[3] || 0, dt[4] || 0, dt[5] || 0, 0);
+};
+
+endpoint.utils.formatTimestamp = function(date) {
+    if (!date) {
+        return null;
+    }
+    var pad = function(number) {
+        var r = String(number);
+        if ( r.length === 1 ) {
+            r = '0' + r;
+        }
+        return r;
+    };
+    return date.getUTCFullYear()
+        + '-' + pad( date.getUTCMonth() + 1 )
+        + '-' + pad( date.getUTCDate() )
+        + 'T' + pad( date.getUTCHours() )
+        + ':' + pad( date.getUTCMinutes() )
+        + ':' + pad( date.getUTCSeconds() )
+        + '.' + String( (date.getUTCMilliseconds()/1000).toFixed(3) ).slice( 2, 5 )
+        + 'Z';
+};
+
+///////////////////////
+//  Private helpers  //
+///////////////////////
 
 var checkHttpOptions = function (url, options) {
     options = options || {};
@@ -69,3 +116,23 @@ var isObject = function (obj) {
 };
 
 var stringType = Function.prototype.call.bind(Object.prototype.toString);
+
+var parse = function (str) {
+    try {
+        if (arguments.length > 1) {
+            var args = arguments[1], i = 0;
+            return str.replace(/(:(?:\w|-)+)/g, () => {
+                if (typeof (args[i]) != 'string') throw new Error('Invalid type of argument: [' + args[i] + '] for url [' + str + '].');
+                return args[i++];
+            });
+        } else {
+            if (str) {
+                return str;
+            }
+            throw new Error('No arguments nor url were received when calling the helper. Please check it\'s definition.');
+        }
+    } catch (err) {
+        sys.logs.error('Some unexpected error happened during the parse of the url for this helper.')
+        throw err;
+    }
+}

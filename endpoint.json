@@ -16,7 +16,7 @@
         "allowMultipleInstances": false
     },
     "icon48": "https://storage.googleapis.com/static.slingrs.io/platform/endpoints/http.png",
-    "configurationHelpUrl": "/endpoints_http.html#configuration",
+    "configurationHelpUrl": "/endpoints-http.html#configuration",
     "status": "ACTIVE",
     "stores": [],
     "events": [
@@ -34,11 +34,6 @@
             "label": "File Downloaded",
             "name": "fileDownloaded",
             "description": "Happens when a async download file process is finished (thrown by a GET function with 'forceDownload' enabled and 'downloadSync' disabled)"
-        },
-        {
-            "label": "Callback",
-            "name": "callback",
-            "description": "Happens when a async process is finished"
         }
     ],
     "functions": [
@@ -49,71 +44,38 @@
             "callbacks": [
                 {
                     "name": "fileDownloaded"
-                },
-                {
-                    "name": "callback"
                 }
             ]
         },
         {
             "label": "POST",
             "name": "_post",
-            "description": "Sends a POST request",
-            "callbacks": [
-                {
-                    "name": "callback"
-                }
-            ]
+            "description": "Sends a POST request"
         },
         {
             "label": "PUT",
             "name": "_put",
-            "description": "Sends a PUT request",
-            "callbacks": [
-                {
-                    "name": "callback"
-                }
-            ]
+            "description": "Sends a PUT request"
         },
         {
             "label": "PATCH",
             "name": "_patch",
-            "description": "Sends a PATCH request",
-            "callbacks": [
-                {
-                    "name": "callback"
-                }
-            ]
+            "description": "Sends a PATCH request"
         },
         {
             "label": "DELETE",
             "name": "_delete",
-            "description": "Sends a DELETE request",
-            "callbacks": [
-                {
-                    "name": "callback"
-                }
-            ]
+            "description": "Sends a DELETE request"
         },
         {
             "label": "HEAD",
             "name": "_head",
-            "description": "Sends a HEAD request",
-            "callbacks": [
-                {
-                    "name": "callback"
-                }
-            ]
+            "description": "Sends a HEAD request"
         },
         {
             "label": "OPTIONS",
             "name": "_options",
-            "description": "Sends a OPTIONS request",
-            "callbacks": [
-                {
-                    "name": "callback"
-                }
-            ]
+            "description": "Sends a OPTIONS request"
         }
     ],
     "scripts":[
