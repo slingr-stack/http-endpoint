@@ -10,8 +10,8 @@
 
 endpoint.sync = {};
 
-endpoint.sync.get = function(httpOption) {
-    var url = parse('/sync');
+endpoint.sync.get = function(httpOptions) {
+	var url = parse('/sync');
     sys.logs.debug('[http] GET from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
     return endpoint._get(options);
@@ -21,41 +21,43 @@ endpoint.sync.get = function(httpOption) {
 // Public API - Generic Functions //
 ////////////////////////////////////
 
-endpoint.get = function(url, httpOptions) {
+endpoint.get = function(url, httpOptions, callbackData, callbacks) {
     var options = checkHttpOptions(url, httpOptions);
-    return endpoint._get(options);
+    return endpoint._get(options, callbackData, callbacks);
 };
 
-endpoint.post = function(url, httpOptions) {
+endpoint.post = function(url, httpOptions, callbackData, callbacks) {
     options = checkHttpOptions(url, httpOptions);
-    return endpoint._post(options);
+    return endpoint._post(options, callbackData, callbacks);
 };
 
-endpoint.put = function(url, httpOptions) {
+endpoint.put = function(url, httpOptions, callbackData, callbacks) {
     options = checkHttpOptions(url, httpOptions);
-    return endpoint._put(options);
+    return endpoint._put(options, callbackData, callbacks);
 };
 
-endpoint.patch = function(url, httpOptions) {
+endpoint.patch = function(url, httpOptions, callbackData, callbacks) {
     options = checkHttpOptions(url, httpOptions);
-    return endpoint._patch(options);
+    return endpoint._patch(options, callbackData, callbacks);
 };
 
-endpoint.delete = function(url, httpOptions) {
+endpoint.delete = function(url, httpOptions, callbackData, callbacks) {
     var options = checkHttpOptions(url, httpOptions);
-    return endpoint._delete(options);
+    return endpoint._delete(options, callbackData, callbacks);
 };
 
-endpoint.head = function(url, httpOptions) {
+endpoint.head = function(url, httpOptions, callbackData, callbacks) {
     var options = checkHttpOptions(url, httpOptions);
-    return endpoint._head(options);
+    return endpoint._head(options, callbackData, callbacks);
 };
 
-endpoint.options = function(url, httpOptions) {
+endpoint.options = function(url, httpOptions, callbackData, callbacks) {
     var options = checkHttpOptions(url, httpOptions);
-    return endpoint._options(options);
+    return endpoint._options(options, callbackData, callbacks);
 };
 
+endpoint.utils = {};
+            
 endpoint.utils.parseTimestamp = function(dateString) {
     if (!dateString) {
         return null;
@@ -118,21 +120,21 @@ var isObject = function (obj) {
 var stringType = Function.prototype.call.bind(Object.prototype.toString);
 
 var parse = function (str) {
-    try {
-        if (arguments.length > 1) {
-            var args = arguments[1], i = 0;
-            return str.replace(/(:(?:\w|-)+)/g, () => {
-                if (typeof (args[i]) != 'string') throw new Error('Invalid type of argument: [' + args[i] + '] for url [' + str + '].');
-                return args[i++];
-            });
-        } else {
-            if (str) {
-                return str;
-            }
-            throw new Error('No arguments nor url were received when calling the helper. Please check it\'s definition.');
-        }
-    } catch (err) {
-        sys.logs.error('Some unexpected error happened during the parse of the url for this helper.')
-        throw err;
+  try {
+    if (arguments.length > 1) {
+      var args = arguments[1], i = 0;
+      return str.replace(/(:(?:\w|-)+)/g, () => {
+        if (typeof (args[i]) != 'string') throw new Error('Invalid type of argument: [' + args[i] + '] for url [' + str + '].');
+        return args[i++];
+      });
+    } else {
+      if (str) {
+        return str;
+      }
+      throw new Error('No arguments nor url were received when calling the helper. Please check it\'s definition.');
     }
+  } catch (err) {
+    sys.logs.error('Some unexpected error happened during the parse of the url for this helper.')
+    throw err;
+  }
 }
