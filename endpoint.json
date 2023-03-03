@@ -153,12 +153,11 @@
         {
             "name": "rememberCookies",
             "label": "Remember cookies",
-            "description": "If it is enabled, a basic system to exchange cookies is started: the endpoint sends the last received cookies in subsequents requests. Valid values 'enable', 'disable', and with placeholders ('Custom' option).",
+            "description": "If it is enabled, a system to exchange cookies is started.",
             "type": "buttonsGroup",
             "required": true,
             "defaultValue": "disable",
             "typeOptions": {
-                "allowCustom": true,
                 "possibleValues":[
                     {
                         "label":"Enable",
