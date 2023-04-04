@@ -20,9 +20,9 @@ step.httpCall = function (inputs) {
 		headers: inputs.headers || [],
 		params: inputs.params || [],
 		body: inputs.body || {},
-		followRedirects : inputs.advancedSettings.followRedirects || false,
-		connectionTimeout: inputs.advancedSettings.connectionTimeout || 5000,
-		readTimeout: inputs.advancedSettings.readTimeout || 60000,
+		followRedirects : inputs.followRedirects || false,
+		connectionTimeout: inputs.connectionTimeout || 5000,
+		readTimeout: inputs.readTimeout || 60000,
 		url: inputs.url || {
 			urlValue: "",
 			paramsValue: []
