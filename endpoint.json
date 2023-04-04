@@ -82,7 +82,8 @@
         "functions.js"
     ],
     "flowSteps":  [
-        "httpCall"
+        "httpCall",
+        "callback"
     ],
     "configuration":[
         {
