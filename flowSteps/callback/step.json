@@ -3,18 +3,5 @@
 	"name": "callback",
 	"category": "integrations",
 	"description": "Callbacks allow for the execution of a flow of steps asynchronously or synchronously. For example, it can execute a block of steps once an HTTP request is received by a webhook service.",
-	"docsUrl": "https://platform-docs.slingr.io/app-development-flows-steps-control-subflow.html",
-	"inputs": [
-		{
-			"label": "Async",
-			"name": "async",
-			"type": "boolean",
-			"description": "True if this block needs to run in an asynchronous way by non blocking execution",
-			"defaultValue": false,
-			"visibility": false,
-			"options": {
-				"allowContextSelector": "false"
-			}
-		}
-	]
+	"docsUrl": "https://platform-docs.slingr.io/app-development-flows-steps-control-subflow.html"
 }
